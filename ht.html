@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Hub</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 0;
+        }
+
+        nav {
+            background-color: #007bff;
+            padding: 15px;
+            color: white;
+            font-size: 1.2em;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>🏋️ Welcome to Fitness Hub</nav>
+
+    <div class="container">
+        <h1>🏆 Stay Fit, Stay Healthy!</h1>
+        <p>Select a category to explore:</p>
+        <button onclick="showPage('workout')">Workout Plans</button>
+        <button onclick="showPage('nutrition')">Nutrition & Diet</button>
+        <button onclick="showPage('bmi')">BMI Calculator</button>
+        <button onclick="showPage('contact')">Contact Us</button>
+
+        <!-- Home Content -->
+        <div id="home">
+            <img src="./Screenshot 2025-05-09 151834.png" alt="Fitness Image">
+            <p>Regular exercise helps improve your overall health, reduces stress, and keeps your body fit.</p>
+        </div>
+
+        <!-- Workout Page -->
+        <div id="workout" class="hidden">
+            <h2>🏋️ Workout Plans</h2>
+            <p>- **Cardio:** Running, Cycling, Jump Rope</p>
+            <p>- **Strength Training:** Push-ups, Squats, Deadlifts</p>
+            <p>- **Flexibility:** Yoga & Stretching</p>
+            <button onclick="showPage('home')">Back</button>
+        </div>
+
+        <!-- Nutrition Page -->
+        <div id="nutrition" class="hidden">
+            <h2>🥗 Nutrition & Diet</h2>
+            <p>- **Protein:** Chicken, Eggs, Fish</p>
+            <p>- **Carbs:** Rice, Oats, Sweet Potatoes</p>
+            <p>- **Healthy Fats:** Nuts, Avocado, Olive Oil</p>
+            <button onclick="showPage('home')">Back</button>
+        </div>
+
+        <!-- BMI Calculator -->
+        <div id="bmi" class="hidden">
+            <h2>🩺 BMI Calculator</h2>
+            <label>Enter Weight (kg):</label> <input type="number" id="weight">
+            <label>Enter Height (m):</label> <input type="number" id="height">
+            <button onclick="calculateBMI()">Calculate BMI</button>
+            <p id="bmiResult"></p>
+            <button onclick="showPage('home')">Back</button>
+        </div>
+
+        <!-- Contact Page -->
+        <div id="contact" class="hidden">
+            <h2>📩 Contact Us</h2>
+            <p>Want personalized fitness plans? Reach out!</p>
+            <input type="text" id="name" placeholder="Your Name">
+            <input type="email" id="email" placeholder="Your Email">
+            <button onclick="submitForm()">Submit</button>
+            <p id="formMessage"></p>
+            <button onclick="showPage('home')">Back</button>
+        </div>
+    </div>
+
+    <script>
+        // Show selected page and hide others
+        function showPage(pageId) {
+            document.querySelectorAll('.container > div').forEach(div => div.classList.add('hidden'));
+            document.getElementById(pageId).classList.remove('hidden');
+        }
+
+        // BMI Calculator Function
+        function calculateBMI() {
+            let weight = document.getElementById("weight").value;
+            let height = document.getElementById("height").value;
+            if (weight && height) {
+                let bmi = (weight / (height * height)).toFixed(2);
+                document.getElementById("bmiResult").innerText = `Your BMI: ${bmi}`;
+            } else {
+                alert("Please enter valid values!");
+            }
+        }
+
+        // Contact Form Submission
+        function submitForm() {
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            if (name && email) {
+                document.getElementById("formMessage").innerText = "✅ Thank you for contacting us!";
+            } else {
+                alert("Please enter valid details!");
+            }
+        }
+    </script>
+
+</body>
+</html>

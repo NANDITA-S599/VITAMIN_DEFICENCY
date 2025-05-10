@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vitamin Deficiency Detector</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        nav {
+            background-color: #007bff;
+            padding: 15px;
+            color: white;
+            font-size: 1.2em;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>🍎 Vitamin Deficiency Detector</nav>
+
+    <div class="container">
+        <h1>🌿 Check Your Vitamin Deficiency!</h1>
+        <p>Select a page to explore:</p>
+        <button onclick="showPage('quiz')">Deficiency Quiz</button>
+        <button onclick="showPage('recommendations')">Diet Recommendations</button>
+
+        <!-- Home Page -->
+        <div id="home">
+            <img src="https://source.unsplash.com/800x400/?healthy,food" alt="Healthy Food">
+            <p>Identify your vitamin deficiencies and get proper diet recommendations.</p>
+        </div>
+
+        <!-- Deficiency Quiz Page -->
+        <div id="quiz" class="hidden">
+            <h2>🧐 Deficiency Quiz</h2>
+            <p>Answer the questions to detect possible deficiencies:</p>
+            <label>Do you often feel tired or weak?</label>
+            <select id="fatigue">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+            </select>
+
+            <label>Do you experience dry skin or hair loss?</label>
+            <select id="skin">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+            </select>
+
+            <button onclick="checkDeficiency()">Check Deficiency</button>
+            <p id="result"></p>
+            <button onclick="showPage('home')">Back</button>
+        </div>
+
+        <!-- Diet Recommendations Page -->
+        <div id="recommendations" class="hidden">
+            <h2>🥗 Diet Recommendations</h2>
+            <img src="https://source.unsplash.com/800x400/?nutrition,diet" alt="Nutrition Image">
+            <p>- **Vitamin D:** Sunlight exposure, Dairy, Fish</p>
+            <p>- **Vitamin A:** Carrots, Sweet Potatoes, Spinach</p>
+            <p>- **Vitamin C:** Citrus fruits, Berries, Broccoli</p>
+            <button onclick="showPage('home')">Back</button>
+        </div>
+    </div>
+
+    <script>
+        // Show selected page and hide others
+        function showPage(pageId) {
+            document.querySelectorAll('.container > div').forEach(div => div.classList.add('hidden'));
+            document.getElementById(pageId).classList.remove('hidden');
+        }
+
+        // Deficiency Detection
+        function checkDeficiency() {
+            let fatigue = document.getElementById("fatigue").value;
+            let skin = document.getElementById("skin").value;
+            let message = "You may have no deficiency.";
+
+            if (fatigue === "yes" && skin === "yes") {
+                message = "You may lack Vitamin D & C. Try sunlight and citrus fruits!";
+            } else if (fatigue === "yes") {
+                message = "You may need more Vitamin D. Get more sunlight exposure!";
+            } else if (skin === "yes") {
+                message = "You may need more Vitamin A. Eat more carrots and spinach!";
+            }
+
+            document.getElementById("result").innerText = message;
+        }
+    </script>
+
+</body>
+</html>
